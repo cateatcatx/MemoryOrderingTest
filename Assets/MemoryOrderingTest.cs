@@ -36,7 +36,7 @@ public class MemoryOrderingTest : MonoBehaviour
         }
         int progress = maxRound == 0 ? 0 : (int)((double)curRound / maxRound * 100);
         
-        Text.text = $"Memory Barrier: {memoryBarrier}\nRound: {progress}\nError: {error}";
+        Text.text = $"Memory Barrier: {memoryBarrier}\nProgress: {progress}%\nError: {error}";
     }
 
     private void OnClick()

@@ -39,6 +39,7 @@ namespace DefaultNamespace
                 b = 1;
 
                 while (d == 0) {}
+                if (memoryBarrier == 1) Thread.MemoryBarrier();
                 if (c != 1)
                     Interlocked.Increment(ref error);
                 c = 0;
@@ -60,6 +61,7 @@ namespace DefaultNamespace
             while (running == 1)
             {
                 while (b == 0) {}
+                if (memoryBarrier == 1) Thread.MemoryBarrier();
                 if (a != 1)
                     Interlocked.Increment(ref error);
                 a = 0;
