@@ -11,3 +11,7 @@ Memory Barrier：是否开启内存屏障。
 Memory Barrier：标识是否开启了内存屏障。  
 Progress：测试进度（百分比）。  
 Error：发生的内存乱序次数。  
+# 测试结果
+![image](https://user-images.githubusercontent.com/2322181/153714919-02b4f7ee-4e7c-4c9c-a8c9-f5a51a64c30d.png)  
+在arm架构的Android手机上，开启10个测试对儿每个测试对儿10000回合，关闭内存屏障的情况下发生了1825次内存乱序错误。
+如果开启内存屏障则不会发生内存乱序。
