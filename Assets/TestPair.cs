@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DefaultNamespace
@@ -29,16 +30,18 @@ namespace DefaultNamespace
             Task.Run(Foo1);
             Task.Run(Foo2);
         }
-        
+
         private void Foo1()
         {
+            var r = new Random();
+            
             for (int i = 0; i < maxRound; ++i)
             {
                 a = 1;
                 if (memoryBarrier == 1) Thread.MemoryBarrier();
-                b = 1;
+                b = r.Next(1, 10);
 
-                while (d == 0) {}
+                while (d * r.Next(1, 10) == 0) {}
                 if (memoryBarrier == 1) Thread.MemoryBarrier();
                 if (c != 1)
                     Interlocked.Increment(ref error);
@@ -46,21 +49,23 @@ namespace DefaultNamespace
                 d = 0;
 
                 curRound = i + 1;
-                Thread.Sleep(1);
+                // Thread.Sleep(1);
             }
 
             a = 1;
             if (memoryBarrier == 1) Thread.MemoryBarrier();
-            b = 1;
+            b = r.Next(1, 10);
         
             running = 0;
         }
 
         private void Foo2()
         {
+            var r = new Random();
+            
             while (running == 1)
             {
-                while (b == 0) {}
+                while (b * r.Next(1, 10) == 0) {}
                 if (memoryBarrier == 1) Thread.MemoryBarrier();
                 if (a != 1)
                     Interlocked.Increment(ref error);
@@ -69,7 +74,7 @@ namespace DefaultNamespace
 
                 c = 1;
                 if (memoryBarrier == 1) Thread.MemoryBarrier();
-                d = 1;
+                d = r.Next(1, 10);
             }
         }
     }
